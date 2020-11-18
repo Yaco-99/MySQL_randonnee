@@ -1,0 +1,14 @@
+label,
+select,
+input {
+  width: 150px;
+  display: inline-block;
+  margin: 5px 0;
+}
+.button {
+  background-color: gray;
+  color: white;
+  padding: 2px 5px;
+  text-align: center;
+  text-decoration: none;
+}
