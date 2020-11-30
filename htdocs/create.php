@@ -1,3 +1,6 @@
+<?php
+require_once 'verification.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,18 +45,18 @@
 		<button type="submit" name="button">Envoyer</button>
 	</form>
     <?php
-    require 'connect.php';
-        if(isset($_POST['button'])){
-            $name= filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-            $difficulty = filter_var($_POST['difficulty'], FILTER_SANITIZE_STRING);
-            $distance = filter_var($_POST['distance'], FILTER_SANITIZE_STRING);
-            $duration = preg_replace("([^0-9:])", "", $_POST['duration']);
-            $height = filter_var($_POST['height_difference'], FILTER_SANITIZE_NUMBER_FLOAT);
-            $available = filter_var($_POST['available'], FILTER_SANITIZE_STRING);
-            $sql = $pdo->prepare('INSERT INTO hiking (name, difficulty, distance, duration, height_difference, available) VALUE (?,?,?,?,?,?)');
-            $sql->execute(array($name, $difficulty, $distance, $duration, $height, $available));
-            echo '<script>alert("hiking added successfully")</script>';
-        }
-    ?>
+require 'connect.php';
+if (isset($_POST['button'])) {
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $difficulty = filter_var($_POST['difficulty'], FILTER_SANITIZE_STRING);
+    $distance = filter_var($_POST['distance'], FILTER_SANITIZE_STRING);
+    $duration = preg_replace("([^0-9:])", "", $_POST['duration']);
+    $height = filter_var($_POST['height_difference'], FILTER_SANITIZE_NUMBER_FLOAT);
+    $available = filter_var($_POST['available'], FILTER_SANITIZE_STRING);
+    $sql = $pdo->prepare('INSERT INTO hiking (name, difficulty, distance, duration, height_difference, available) VALUE (?,?,?,?,?,?)');
+    $sql->execute(array($name, $difficulty, $distance, $duration, $height, $available));
+    echo '<script>alert("hiking added successfully")</script>';
+}
+?>
 </body>
 </html>

@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: login.php");
-    exit;
-}
+require_once 'verification.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
