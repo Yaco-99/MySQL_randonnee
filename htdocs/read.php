@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +25,14 @@
         <th>available</th>
     </tr>
     <?php
-        require 'connect.php';
-        $sql= $pdo->query('SELECT * FROM hiking');
-        while($rows = $sql->fetch()){
-            echo '<tr><td><a href="update.php?id='.$rows['id'].'">'.$rows['name'].'</a></td><td>'.$rows['difficulty'].'</td><td>'.$rows['distance'].'</td><td>'.$rows['duration'].'</td><td>'.$rows['height_difference'].'</td><td>'.$rows['available'].'</td><td><a class="button" href="delete.php?id='.$rows['id'].'">DELETE</a></td>';
-        }
-        $sql->closeCursor();
-    ?>
+require 'connect.php';
+$sql = $pdo->query('SELECT * FROM hiking');
+while ($rows = $sql->fetch()) {
+    echo '<tr><td><a href="update.php?id=' . $rows['id'] . '">' . $rows['name'] . '</a></td><td>' . $rows['difficulty'] . '</td><td>' . $rows['distance'] . '</td><td>' . $rows['duration'] . '</td><td>' . $rows['height_difference'] . '</td><td>' . $rows['available'] . '</td><td><a class="button" href="delete.php?id=' . $rows['id'] . '">DELETE</a></td>';
+}
+$sql->closeCursor();
+?>
     </table>
+    <a href="logout.php">logout</a>
 </body>
 </html>
